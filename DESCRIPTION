@@ -1,0 +1,12 @@
+Package: confetti
+Version: 0.0.0.9000
+Title: Put Some Confetti In Your Shiny Application
+Description: An helper to call a Javascript library to send some confetti in a shiny app.
+Authors@R: person(given = "Arthur",
+       family = "Bréant",
+       role = c("aut", "cre"),
+       email = "arthur@thinkr.fr")
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
