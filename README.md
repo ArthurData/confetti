@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of `{confetti}` is to put some confetti in your Shiny
+The goal of `{confetti}` is to put some 🎊 confetti 🎊 in your Shiny
 Application.
 
 This package uses a JavaScript library called:
