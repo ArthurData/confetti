@@ -1,0 +1,66 @@
+---
+title: "flat_minimal.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+library(htmltools)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all()
+```
+
+# `useConfetti()`: Init confetti in UI
+    
+```{r function-useConfetti}
+#' useConfetti
+#' 
+#' create an html dependency to a Shiny app
+#' 
+#' @importFrom htmltools htmlDependency
+#' 
+#' @return a html_dependency
+#' @export
+#' 
+#' @examples
+useConfetti <- function() {
+  htmlDependency(
+    name = "canvas-confetti",
+    version = "1.5.1",
+    src = system.file("www", "canvas-confetti-1.5.1", package = "confetti"),
+    script = c(
+      "confetti.browser.min.js"
+    )
+  )
+}
+```
+  
+```{r example-useConfetti}
+useConfetti()
+```
+  
+```{r tests-useConfetti}
+test_that("useConfetti works", {
+  expect_true(inherits(useConfetti, "function"))
+  dep <- useConfetti()
+  expect_false(is.null(dep))
+  expect_equal(dep[["name"]], "canvas-confetti")
+  expect_true(length(dep[["script"]]) >= 1)
+})
+```
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(
+  flat_file = "dev/flat_minimal.Rmd",
+  vignette_name = "Send confetti",
+  overwrite = TRUE,
+  check = FALSE
+)
+```

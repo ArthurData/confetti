@@ -5,3 +5,6 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
+^confetti\.Rproj$
+^\.github$
+^codecov\.yml$
