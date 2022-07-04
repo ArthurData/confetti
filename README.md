@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# confetti
+### {confetti} <img src="man/figures/logo.png" align="right" height="138" />
 
 <!-- badges: start -->
 
@@ -18,7 +18,7 @@ Application.
 This package uses a JavaScript library called:
 **[canvas-confetti](https://github.com/catdad/canvas-confetti)**.
 
-## Installation
+#### Installation
 
 You can install the development version of confetti from
 [GitHub](https://github.com/) with:
@@ -28,7 +28,7 @@ You can install the development version of confetti from
 devtools::install_github("ArthurData/confetti")
 ```
 
-## Example
+#### Example
 
 Let’s make a fun application with some confetti!
 
@@ -38,7 +38,7 @@ library(confetti)
 
 *more details to come*
 
-## Code of Conduct
+#### Code of Conduct
 
 Please note that the confetti project is released with a [Contributor
 Code of
