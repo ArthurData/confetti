@@ -7,10 +7,12 @@ Description: An helper to call a Javascript library to send some confetti
     in a shiny app.
 License: MIT + file LICENSE
 Imports: 
-    htmltools
+    htmltools,
+    shiny
 Suggests: 
     knitr,
     rmarkdown,
+    shinytest2,
     testthat
 VignetteBuilder: 
     knitr

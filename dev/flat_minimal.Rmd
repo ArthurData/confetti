@@ -34,7 +34,8 @@ useConfetti <- function() {
     version = "1.5.1",
     src = system.file("www", "canvas-confetti-1.5.1", package = "confetti"),
     script = c(
-      "confetti.browser.min.js"
+      "confetti.browser.min.js",
+      "handlers.js"
     )
   )
 }
@@ -50,7 +51,125 @@ test_that("useConfetti works", {
   dep <- useConfetti()
   expect_false(is.null(dep))
   expect_equal(dep[["name"]], "canvas-confetti")
-  expect_true(length(dep[["script"]]) >= 1)
+  expect_true(length(dep[["script"]]) > 1)
+})
+```
+
+# `sendConfetti()`: Send confetti 
+    
+```{r function-sendConfetti}
+#' sendConfetti
+#' 
+#' Send confetti in your shiny app
+#' 
+#' @param particle_count Number. How many confetti launch. Default is 50.
+#' @param angle In degrees. The angle in which to launch the confetti. Default is 90.
+#' @param spread In degrees. How far off center the confetti can go. Default is 45.
+#' @param start_velocity Number. How fast the confetti start. Default is 45
+#' @param decay Number between 0 and 1. How quickly the confetti will lose speed. Default is 0.9.
+#' @param gravity Number. How quickly the particles are pulled down. Default is 1.
+#' @param drift Number. How much to the side the confetti will drift. Default is 0.
+#' @param ticks Number. How many times the confetti will move. Default is 200.
+#' @param origin List. Where to start firing confetti from. Default is 0.5.
+#' @param colors List. A list of color strings, in the HEX format.
+#' @param shapes List. A list of shapes for the confetti. Square or circle.
+#' @param scalar Number. Scale factor for each confetti particle. Default is 1.
+#' @param z_index Number. Customize confetti canvas on your page. Default is 100.
+#' @param disable_for_reduced_motion Logical. Disables confetti entirely for users that prefer reduced motion. Default is FALSE.
+#' @param session a shiny session
+#' 
+#' @importFrom shiny getDefaultReactiveDomain
+#'
+#' @return a javascript event in a shiny app to launch confetti.
+#' @export
+sendConfetti <- function(particle_count = 50,
+                         angle = 90,
+                         spread = 45,
+                         start_velocity = 45,
+                         decay = 0.9,
+                         gravity = 1,
+                         drift = 0,
+                         ticks = 200,
+                         origin = list(x = 0.5, y = 0.5),
+                         colors = NA,
+                         shapes = NA,
+                         scalar = 1,
+                         z_index = 100,
+                         disable_for_reduced_motion = FALSE,
+                         session = shiny::getDefaultReactiveDomain()) {
+  
+  session$sendCustomMessage(
+    "send.confetti",
+    list(
+      particle_count = particle_count,
+      angle = angle,
+      spread = spread,
+      start_velocity = start_velocity,
+      decay = decay,
+      gravity = gravity,
+      drift = drift,
+      ticks = ticks,
+      origin = origin,
+      colors = colors,
+      shapes = shapes,
+      scalar = scalar,
+      z_index = z_index,
+      disable_for_reduced_motion = disable_for_reduced_motion
+    )
+  )
+}
+```
+
+```{r example-sendConfetti}
+if (interactive()) {
+  library(shiny)
+  
+  shinyApp(
+    ui = fluidRow(
+      useConfetti(),
+      actionButton(
+        inputId = "go",
+        label =  "Send confetti"
+      )
+
+    ),
+    
+    server = function(input, output, session) {
+      observeEvent(input$go, {
+        sendConfetti()
+        message("You have sent ", input$sentConfetti, " confetti")
+      })
+    }
+  )
+}
+```
+
+```{r tests-sendConfetti}
+library(shinytest2)
+test_that("sendConfetti works", {
+  
+  skip_if_not(interactive())
+  
+  expect_true(inherits(sendConfetti, "function"))
+  
+  app <- shinytest2::AppDriver$new(
+    system.file("shiny", "example", "app.R", package = "confetti")
+  )
+  expect_equal(app$get_value(input = "go")[[1]], 0)
+  expect_equal(app$get_value(input = "sentConfetti")[[1]], 0)
+  
+  app$click("go")
+  html <- app$get_html("canvas")
+  expect_equal(
+    html, 
+    "<canvas style=\"position: fixed; top: 0px; left: 0px; pointer-events: none; z-index: 100;\" width=\"992\" height=\"1323\"></canvas>"
+  )
+  expect_equal(app$get_value(input = "go")[[1]], 1)
+  expect_equal(app$get_value(input = "sentConfetti")[[1]], 1)
+  
+  app$click("go")
+  expect_equal(app$get_value(input = "go")[[1]], 2)
+  expect_equal(app$get_value(input = "sentConfetti")[[1]], 2)
 })
 ```
 
@@ -60,6 +179,8 @@ test_that("useConfetti works", {
 fusen::inflate(
   flat_file = "dev/flat_minimal.Rmd",
   vignette_name = "Send confetti",
+  open_vignette = FALSE,
+  document = TRUE,
   overwrite = TRUE,
   check = FALSE
 )
