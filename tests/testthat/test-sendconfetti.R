@@ -8,7 +8,7 @@ test_that("sendConfetti works", {
   expect_true(inherits(sendConfetti, "function"))
   
   app <- shinytest2::AppDriver$new(
-    system.file("shiny", "example", "app.R", package = "confetti")
+    system.file("shiny", "test", "app.R", package = "confetti")
   )
   expect_equal(app$get_value(input = "go")[[1]], 0)
   expect_equal(app$get_value(input = "sentConfetti")[[1]], 0)

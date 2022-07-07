@@ -70,7 +70,6 @@ if (interactive()) {
         inputId = "go",
         label =  "Send confetti"
       )
-
     ),
     
     server = function(input, output, session) {
