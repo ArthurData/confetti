@@ -17,7 +17,8 @@ useConfetti <- function() {
     version = "1.5.1",
     src = system.file("www", "canvas-confetti-1.5.1", package = "confetti"),
     script = c(
-      "confetti.browser.min.js"
+      "confetti.browser.min.js",
+      "handlers.js"
     )
   )
 }

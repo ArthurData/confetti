@@ -6,6 +6,8 @@
 \alias{confetti-package}
 \title{confetti: Put Some Confetti In Your Shiny Application}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 An helper to call a Javascript library to send some confetti in a shiny app.
 }
 \author{

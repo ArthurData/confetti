@@ -5,5 +5,5 @@ test_that("useConfetti works", {
   dep <- useConfetti()
   expect_false(is.null(dep))
   expect_equal(dep[["name"]], "canvas-confetti")
-  expect_true(length(dep[["script"]]) >= 1)
+  expect_true(length(dep[["script"]]) > 1)
 })

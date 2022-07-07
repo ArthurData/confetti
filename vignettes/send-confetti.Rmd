@@ -32,3 +32,30 @@ useConfetti()
 
   
 
+# `sendConfetti()`: Send confetti 
+
+    
+
+```{r example-sendConfetti}
+if (interactive()) {
+  library(shiny)
+  
+  shinyApp(
+    ui = fluidRow(
+      useConfetti(),
+      actionButton(
+        inputId = "go",
+        label =  "Send confetti"
+      )
+    ),
+    
+    server = function(input, output, session) {
+      observeEvent(input$go, {
+        sendConfetti()
+        message("You have sent ", input$sentConfetti, " confetti")
+      })
+    }
+  )
+}
+```
+
