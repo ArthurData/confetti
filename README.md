@@ -32,8 +32,8 @@ devtools::install_github("ArthurData/confetti")
 
 Let’s make a fun application with some confetti!
 
-⚠ You will have to open you app in a new window with your favorite web
-brower to see confetti.
+⚠ You will have to open your app in a new window with your favorite web
+browser to see confetti.
 
 ``` r
 library(confetti)
