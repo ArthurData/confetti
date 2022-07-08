@@ -7,28 +7,3 @@ test_that("useConfetti works", {
   expect_equal(dep[["name"]], "canvas-confetti")
   expect_true(length(dep[["script"]]) > 1)
 })
-
-test_that("sendConfetti works", {
-  library(shinytest2)
-
-  expect_true(inherits(sendConfetti, "function"))
-  
-  app <- shinytest2::AppDriver$new(
-    system.file("shiny", "test", "app.R", package = "confetti")
-  )
-  expect_equal(app$get_value(input = "go")[[1]], 0)
-  expect_equal(app$get_value(input = "sentConfetti")[[1]], 0)
-  
-  app$click("go")
-  html <- app$get_html("canvas")
-  expect_equal(
-    html, 
-    "<canvas style=\"position: fixed; top: 0px; left: 0px; pointer-events: none; z-index: 100;\" width=\"992\" height=\"1323\"></canvas>"
-  )
-  expect_equal(app$get_value(input = "go")[[1]], 1)
-  expect_equal(app$get_value(input = "sentConfetti")[[1]], 1)
-  
-  app$click("go")
-  expect_equal(app$get_value(input = "go")[[1]], 2)
-  expect_equal(app$get_value(input = "sentConfetti")[[1]], 2)
-})

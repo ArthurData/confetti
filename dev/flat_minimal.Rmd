@@ -144,8 +144,8 @@ if (interactive()) {
 ```
 
 ```{r tests-sendConfetti}
-library(shinytest2)
 test_that("sendConfetti works", {
+  library(shinytest2)
   
   expect_true(inherits(sendConfetti, "function"))
   

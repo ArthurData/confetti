@@ -2,7 +2,7 @@
 
 test_that("sendConfetti works", {
   library(shinytest2)
-
+  
   expect_true(inherits(sendConfetti, "function"))
   
   app <- shinytest2::AppDriver$new(
