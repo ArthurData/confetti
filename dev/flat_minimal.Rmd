@@ -147,8 +147,6 @@ if (interactive()) {
 library(shinytest2)
 test_that("sendConfetti works", {
   
-  skip_if_not(interactive())
-  
   expect_true(inherits(sendConfetti, "function"))
   
   app <- shinytest2::AppDriver$new(

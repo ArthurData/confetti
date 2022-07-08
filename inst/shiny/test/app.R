@@ -1,5 +1,5 @@
 library(shiny)
-pkgload::load_all()
+library(confetti)
 
 ui <- fluidRow(
   useConfetti(),
