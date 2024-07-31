@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/ArthurData/confetti/workflows/R-CMD-check/badge.svg)](https://github.com/ArthurData/confetti/actions)
+[![R-CMD-check](https://github.com/ArthurData/confetti/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArthurData/confetti/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/ArthurData/confetti/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ArthurData/confetti?branch=main)
 <!-- badges: end -->
 
