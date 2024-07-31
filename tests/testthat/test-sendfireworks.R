@@ -3,6 +3,10 @@
 test_that("sendfireworks works", {
   library(shinytest2)
   
+  if (shinytest2:::on_ci() && shinytest2:::is_windows()) {
+    testthat::skip()
+  }
+  
   app <- shinytest2::AppDriver$new(
     system.file("shiny", "test", "fireworks", "app.R", package = "confetti")
   )

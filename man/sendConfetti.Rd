@@ -62,11 +62,7 @@ Send confetti in your shiny app
 \examples{
 if (interactive()) {
   library(shiny)
-  
-  if (shinytest2:::on_ci() && shinytest2:::is_windows()) {
-    testthat::skip()
-  }
-  
+
   shinyApp(
     ui = fluidRow(
       useConfetti(),
