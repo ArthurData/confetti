@@ -1,0 +1,20 @@
+flat_minimal.Rmd:
+  path: dev/flat_minimal.Rmd
+  state: active
+  R:
+  - R/sendconfetti.R
+  - R/sendfireworks.R
+  - R/useconfetti.R
+  tests:
+  - tests/testthat/test-useconfetti.R
+  - tests/testthat/test-sendconfetti.R
+  - tests/testthat/test-sendfireworks.R
+  vignettes: vignettes/send-confetti.Rmd
+  inflate:
+    flat_file: dev/flat_minimal.Rmd
+    vignette_name: Send confetti
+    open_vignette: false
+    check: false
+    document: true
+    overwrite: 'yes'
+    clean: ask

@@ -150,10 +150,11 @@ test_that("sendConfetti works", {
   expect_true(inherits(sendConfetti, "function"))
   
   app <- shinytest2::AppDriver$new(
-    system.file("shiny", "test", "app.R", package = "confetti")
+    system.file("shiny", "test", "confetti", "app.R", package = "confetti")
   )
   expect_equal(app$get_value(input = "go")[[1]], 0)
-  expect_equal(app$get_value(input = "sentConfetti")[[1]], 0)
+  expect_equal(app$get_value(input = "sentFireworks"), 0)
+  expect_equal(app$get_value(input = "sentConfetti"), 0)
   
   app$click("go")
   html <- app$get_html("canvas")
@@ -162,13 +163,102 @@ test_that("sendConfetti works", {
     "<canvas style=\"position: fixed; top: 0px; left: 0px; pointer-events: none; z-index: 100;\" width=\"992\" height=\"1323\"></canvas>"
   )
   expect_equal(app$get_value(input = "go")[[1]], 1)
-  expect_equal(app$get_value(input = "sentConfetti")[[1]], 1)
+  expect_equal(app$get_value(input = "sentConfetti"), 1)
+  expect_equal(app$get_value(input = "sentFireworks"), 0)
   
   app$click("go")
   expect_equal(app$get_value(input = "go")[[1]], 2)
-  expect_equal(app$get_value(input = "sentConfetti")[[1]], 2)
+  expect_equal(app$get_value(input = "sentConfetti"), 2)
+  expect_equal(app$get_value(input = "sentFireworks"), 0)
 })
 ```
+
+# `sendFireworks()`: Send fireworks
+
+```{r function-sendfireworks}
+#' sendfireworks
+#' 
+#' Send fireworks in your shiny app
+#' 
+#' @param duration Number. Fireworks duration in seconds
+#' @param particle_count Number. How many confetti launch. Default is 50.
+#' @param colors List. A list of color strings, in the HEX format.
+#' @param shapes List. A list of shapes for the confetti. Square or circle.
+#' @param session a shiny session
+#' 
+#' @importFrom shiny getDefaultReactiveDomain
+#'
+#' @return a javascript event in a shiny app to launch confetti.
+#' @export
+sendfireworks <- function(duration,
+                         particle_count = 50,
+                         colors = NA,
+                         shapes = NA,
+                         session = shiny::getDefaultReactiveDomain()) {
+  
+  session$sendCustomMessage(
+    "send.fireworks",
+    list(
+      duration = duration,
+      particle_count = particle_count,
+      colors = colors,
+      shapes = shapes
+    )
+  )
+}
+```
+  
+```{r example-sendfireworks}
+if (interactive()) {
+  library(shiny)
+  
+  shinyApp(
+    ui = fluidRow(
+      useConfetti(),
+      actionButton(
+        inputId = "go",
+        label =  "Send fireworks"
+      )
+    ),
+    
+    server = function(input, output, session) {
+      observeEvent(input$go, {
+        sendfireworks(
+          duration = 5,
+          colors = list("#DAB436", "#36DA62", "#365CDA")
+        )
+        message("You have sent ", input$sentFireworks, " fireworks")
+        message("You have sent ", input$sentConfetti, " confetti")
+      })
+    }
+  )
+}
+```
+  
+```{r tests-sendfireworks}
+test_that("sendfireworks works", {
+  library(shinytest2)
+  
+  app <- shinytest2::AppDriver$new(
+    system.file("shiny", "test", "fireworks", "app.R", package = "confetti")
+  )
+  expect_equal(app$get_value(input = "go")[[1]], 0)
+  expect_equal(app$get_value(input = "sentFireworks"), 0)
+  
+  app$click("go")
+  html <- app$get_html("canvas")
+  
+  expect_equal(app$get_value(input = "go")[[1]], 1)
+  expect_equal(app$get_value(input = "sentFireworks"), 1)
+  expect_equal(app$get_value(input = "sentConfetti"), 0)
+  
+  app$click("go")
+  expect_equal(app$get_value(input = "go")[[1]], 2)
+  expect_equal(app$get_value(input = "sentFireworks"), 2)
+  expect_equal(app$get_value(input = "sentConfetti"), 0)
+})
+```
+  
 
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
