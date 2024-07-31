@@ -124,6 +124,10 @@ sendConfetti <- function(particle_count = 50,
 if (interactive()) {
   library(shiny)
   
+  if (shinytest2:::on_ci() && shinytest2:::is_windows()) {
+    testthat::skip()
+  }
+  
   shinyApp(
     ui = fluidRow(
       useConfetti(),
@@ -211,6 +215,10 @@ sendfireworks <- function(duration,
 ```{r example-sendfireworks}
 if (interactive()) {
   library(shiny)
+
+  if (shinytest2:::on_ci() && shinytest2:::is_windows()) {
+    testthat::skip()
+  }
   
   shinyApp(
     ui = fluidRow(
