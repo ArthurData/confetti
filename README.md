@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+![](https://img.shields.io/badge/r%20package-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)
+
 [![R-CMD-check](https://github.com/ArthurData/confetti/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArthurData/confetti/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/ArthurData/confetti/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ArthurData/confetti?branch=main)
