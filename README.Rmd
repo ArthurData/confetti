@@ -62,7 +62,7 @@ ui <- fluidRow(
 )
 ```
 
-Then, in you server, call the `sendConfetti()` function whatever you want.
+Then, in you server, call the `sendConfetti()` or `sendfireworks()` function whatever you want.
 
 Here, every time an `actionButton` is clicked, the according `observeEvent` is launch and send confetti.
 
